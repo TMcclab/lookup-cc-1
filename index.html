@@ -524,6 +524,13 @@ state.inputs = [{ name: "TEST Colour 001", L: 63.4, a: 12.3, b: -24.8 }];
 renderLookup();
 renderInputs();
 renderResults();
+
+const searchBtn = document.getElementById("searchBtn");
+searchBtn.addEventListener("click", () => {
+    gtag('event', 'lookup_clicked');
+});
+
+  
 </script>
 </body>
 </html>
