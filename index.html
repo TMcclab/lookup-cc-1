@@ -393,13 +393,18 @@ function setInputsFromText(text) {
   }
 }
 
-function setupDropZone(zoneId, fileInputId, handler) {
+// ドロップゾーン・ファイル選択時にGA4イベントを送信できるように変更
+function setupDropZone(zoneId, fileInputId, handler, analyticsEventName) {
   const zone = $(zoneId);
   const input = $(fileInputId);
   zone.addEventListener("click", () => input.click());
   input.addEventListener("change", e => {
     const file = e.target.files[0];
     if (!file) return;
+    
+    // ★ GA4 イベント送信
+    gtag('event', analyticsEventName, { 'file_name': file.name });
+
     const reader = new FileReader();
     reader.onload = () => handler(reader.result);
     reader.readAsText(file, "UTF-8");
@@ -491,12 +496,15 @@ $("searchBtn").addEventListener("click", () => {
   gtag('event', 'lookup_clicked');
 });
 
+// テキスト貼り付け読み込み時にもイベントを送信
 $("lookupPasteBtn").addEventListener("click", () => {
   setLookupFromText($("lookupPasteArea").value);
+  gtag('event', 'paste_lookup_text');
 });
 
 $("inputPasteBtn").addEventListener("click", () => {
   setInputsFromText($("inputPasteArea").value);
+  gtag('event', 'paste_input_text');
 });
 
 $("downloadDefaultLookup").addEventListener("click", () => {
@@ -512,7 +520,11 @@ $("downloadInputFormat").addEventListener("click", () => {
   downloadCsv("input_format_lab.csv", [["name", "*L", "*a", "*b"], ["TEST_Sample_001", 63.4, 12.3, -24.8]]);
 });
 
+// 結果CSVダウンロード時にイベントを送信
 $("downloadResults").addEventListener("click", () => {
+  // ★ GA4 イベント送信
+  gtag('event', 'download_results_csv');
+
   const rows = [["input_name", "input_*l", "input_*a", "input_*b", "rank", "delta_e", "lookup_name", "lookup_*l", "lookup_*a", "lookup_*b"]];
   state.results.forEach(r => {
     rows.push([
@@ -531,8 +543,9 @@ $("downloadResults").addEventListener("click", () => {
   downloadCsv("delta_e_search_results.csv", rows);
 });
 
-setupDropZone("lookupDrop", "lookupFile", setLookupFromText);
-setupDropZone("inputDrop", "inputFile", setInputsFromText);
+// ファイルアップロード時にそれぞれのイベント名を指定
+setupDropZone("lookupDrop", "lookupFile", setLookupFromText, "upload_lookup_csv");
+setupDropZone("inputDrop", "inputFile", setInputsFromText, "upload_input_csv");
 
 // Initialize
 state.lookup = generateDefaultLookup(30);
