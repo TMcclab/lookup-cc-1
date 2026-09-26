@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Manual & Disclaimers - Color Space Lookup & Delta E Tool</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body { background-color: #f8f9fa; color: #333; line-height: 1.7; }
+    .container { max-width: 850px; }
+    .step-box { background: #fff; border-left: 4px solid #0d6efd; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,.075); }
+  </style>
+</head>
+<body class="py-5">
+  <div class="container bg-white p-5 rounded shadow-sm">
+    <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-3">
+      <h1 class="h3 mb-0">📖 User Manual & Disclaimers</h1>
+      <a href="index.html" class="btn btn-outline-secondary btn-sm">← Back to Tool</a>
+    </div>
+
+    <!-- 1. Introduction & Workflow -->
+    <section class="mb-5">
+      <h2 class="h4 text-primary mb-3">1. How to Use the Tool</h2>
+      <p>This tool allows you to load reference color data (Lookup Table) and target test colors (Input Data) to automatically calculate color differences (<b>ΔE</b>) and rank the closest matching colors.</p>
+      
+      <div class="step-box">
+        <h5 class="text-primary">Step 1: Load the Reference Data (Lookup Table)</h5>
+        <ul>
+          <li><strong>CSV Upload:</strong> Click "Upload CSV" or drag and drop your CSV file into the designated drop zone.</li>
+          <li><strong>Text Paste:</strong> Copy data from Excel or a text editor and paste it into the text area, then click "Load from Text".</li>
+          <li><em>Format:</em> Requires a header line (<code>name,*L,*a,*b</code>) with numeric values within ranges (0 &lt; *L &lt; 100, -100 &lt; *a, *b &lt; 100).</li>
+        </ul>
+      </div>
+
+      <div class="step-box">
+        <h5 class="text-primary">Step 2: Load the Test Colors (Input Data)</h5>
+        <ul>
+          <li>Provide your test colour samples using the same methods (CSV upload or direct text paste).</li>
+          <li>You can also add or edit rows manually in the interactive table.</li>
+        </ul>
+      </div>
+
+      <div class="step-box">
+        <h5 class="text-primary">Step 3: Calculate ΔE & Review Results</h5>
+        <ul>
+          <li>Click the green <strong>"Search Top 3 Matches (ΔE)"</strong> button to run the matching algorithm.</li>
+          <li>Review the top 3 closest reference matches for each test sample, complete with color preview chips and ΔE values.</li>
+          <li>Click <strong>"Download Results CSV"</strong> to export your analysis results.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 2. Notices & Disclaimers -->
+    <section class="mb-4">
+      <h2 class="h4 text-danger mb-3">2. Notices & Disclaimers</h2>
+      
+      <div class="p-3 bg-light rounded border">
+        <h6 class="fw-bold">Notice on Data Usage</h6>
+        <p class="small text-secondary">
+          This tool performs color space analysis based on the Lookup Table and TEST Colour measurement data provided by the user. 
+          Please verify the accuracy, completeness, authorization for use, and suitability for your intended purpose of the data used under your own responsibility. 
+          The provider of this tool does not guarantee the content, rights relationship, or accuracy of the data entered or registered by the user in any way.
+        </p>
+
+        <h6 class="fw-bold mt-3">About Reference Data</h6>
+        <p class="small text-secondary mb-0">
+          This tool does not include any Reference Database specific to a particular company or product. The Lookup Table must be prepared and verified by the user. 
+          The creator and provider of this page assume no responsibility or liability for any results or consequences arising from the use of specific data.
+        </p>
+      </div>
+    </section>
+
+    <div class="text-center mt-5 pt-3 border-top">
+      <a href="index.html" class="btn btn-primary">Return to Tool Page</a>
+    </div>
+  </div>
+</body>
+</html>
