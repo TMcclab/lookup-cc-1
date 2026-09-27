@@ -42,7 +42,7 @@
     </a>
   </div>
   <p class="text-secondary mb-4">
-    Manage CIE L*a*b* reference databases and test color samples, compute ΔE (CIE76), and find nearest color matches.
+    Manage CIE La*b** reference databases and test color samples, compute ΔE (CIE76), and find nearest color matches.
   </p>
 
 
@@ -54,7 +54,7 @@
     </div>
     <div id="lookupCollapse" class="collapse show">
       <div class="card-body">
-        <p class="text-secondary">CSV format: <span class="mono">name, *L, *a, *b</span> (Valid ranges: 0 &lt; *L &lt; 100, -100 &lt; *a &lt; 100, -100 &lt; *b &lt; 100)</p>
+        <p class="text-secondary">CSV format: <span class="mono">name, L*, a*, b*</span> (Valid ranges: 0 &lt; L* &lt; 100, -100 &lt; a* &lt; 100, -100 &lt; b* &lt; 100)</p>
         <div class="d-flex flex-wrap gap-2 mb-3">
           <label class="btn btn-primary mb-0">
             Upload CSV
@@ -79,9 +79,9 @@
               <tr>
                 <th>Preview</th>
                 <th>Name</th>
-                <th>*L</th>
-                <th>*a</th>
-                <th>*b</th>
+                <th>L*</th>
+                <th>a*</th>
+                <th>b*</th>
               </tr>
             </thead>
             <tbody id="lookupBody"></tbody>
@@ -95,7 +95,7 @@
   <div class="card section-card shadow-sm">
     <div class="card-body">
       <h2 class="h4">2. Input Data (TEST Colour Samples)</h2>
-      <p class="text-secondary">CSV columns: <span class="mono">name, *L, *a, *b</span> (Valid ranges: 0 &lt; *L &lt; 100, -100 &lt; *a &lt; 100, -100 &lt; *b &lt; 100)</p>
+      <p class="text-secondary">CSV columns: <span class="mono">name, L*, a*, b*</span> (Valid ranges: 0 &lt; L* &lt; 100, -100 &lt; a* &lt; 100, -100 &lt; b* &lt; 100)</p>
       <div class="d-flex flex-wrap gap-2 mb-3">
         <label class="btn btn-primary mb-0">
           Upload CSV
@@ -120,9 +120,9 @@
             <tr>
               <th>Preview</th>
               <th>Name</th>
-              <th>*L</th>
-              <th>*a</th>
-              <th>*b</th>
+              <th>L*</th>
+              <th>a*</th>
+              <th>b*</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -144,16 +144,16 @@
           <thead class="table-light">
             <tr>
               <th>Input Name</th>
-              <th>Input *L</th>
-              <th>Input *a</th>
-              <th>Input *b</th>
+              <th>Input L*</th>
+              <th>Input a*</th>
+              <th>Input b*</th>
               <th>Rank</th>
               <th>ΔE (CIE76)</th>
               <th>Lookup Name</th>
               <th>Lookup Preview</th>
-              <th>Lookup *L</th>
-              <th>Lookup *a</th>
-              <th>Lookup *b</th>
+              <th>Lookup L*</th>
+              <th>Lookup a*</th>
+              <th>Lookup b*</th>
             </tr>
           </thead>
           <tbody id="resultBody"></tbody>
@@ -522,16 +522,16 @@ $("inputPasteBtn").addEventListener("click", () => {
 });
 
 $("downloadDefaultLookup").addEventListener("click", () => {
-  const rows = [["name", "*L", "*a", "*b"], ...state.lookup.map(r => [r.name, r.L, r.a, r.b])];
+  const rows = [["name", "L*", "a*", "b*"], ...state.lookup.map(r => [r.name, r.L, r.a, r.b])];
   downloadCsv("default_reference_lab.csv", rows);
 });
 
 $("downloadLookupFormat").addEventListener("click", () => {
-  downloadCsv("lookup_format_lab.csv", [["name", "*L", "*a", "*b"], ["Reference_001", 50.0, 10.0, -15.5]]);
+  downloadCsv("lookup_format_lab.csv", [["name", "L*", "a*", "b*"], ["Reference_001", 50.0, 10.0, -15.5]]);
 });
 
 $("downloadInputFormat").addEventListener("click", () => {
-  downloadCsv("input_format_lab.csv", [["name", "*L", "*a", "*b"], ["TEST_Sample_001", 63.4, 12.3, -24.8]]);
+  downloadCsv("input_format_lab.csv", [["name", "L*", "a*", "b*"], ["TEST_Sample_001", 63.4, 12.3, -24.8]]);
 });
 
 // 結果CSVダウンロード時にイベントを送信
@@ -539,7 +539,7 @@ $("downloadResults").addEventListener("click", () => {
   // ★ GA4 イベント送信
   gtag('event', 'download_results_csv');
 
-  const rows = [["input_name", "input_*l", "input_*a", "input_*b", "rank", "delta_e", "lookup_name", "lookup_*l", "lookup_*a", "lookup_*b"]];
+  const rows = [["input_name", "input_L*", "input_a*", "input_b*", "rank", "delta_e", "lookup_name", "lookup_L*", "lookup_a*", "lookup_b*"]];
   state.results.forEach(r => {
     rows.push([
       r.input.name, 
