@@ -2,6 +2,9 @@
 
 A client-side web application that calculates color difference ($\Delta E_{76}$) between a reference Lookup Table and TEST Colour samples, helping you find the closest matching colors.
 
+For example, if you have $L^*a^*b^*$ values obtained from a colorimeter/spectrophotometer, digital images, or other color conversion sources, you can easily find which reference color it matches most closely.
+
+
 ## 🔗 Live Demo
 * [Open Tool (GitHub Pages)](https://tmcclab.github.io/lookup-cc-1/)
 
